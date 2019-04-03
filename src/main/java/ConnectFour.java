@@ -3,11 +3,11 @@ import java.io.BufferedReader;
 
 public class ConnectFour {
 
-    private int[][] board;
-    private int boardColumns =7;
-    private int boardRows = 6;
+    int[][] board;
+    int boardColumns =7;
+    int boardRows = 6;
 
-    public ConnectFour(){
+    ConnectFour(){
         board=new int[boardRows][boardColumns];
     }
 
