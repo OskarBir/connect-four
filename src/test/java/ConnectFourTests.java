@@ -9,6 +9,7 @@ import java.io.PrintStream;
 
 public class ConnectFourTests {
     private final ConnectFour connectFour = new ConnectFour();
+    private final ConnectFour connectFour4x4 = new ConnectFour(4,4,0);
 
     @Test
     void connectFourIsNotNull() {
@@ -17,26 +18,40 @@ public class ConnectFourTests {
 
     @Test
     void defaultBoardColumns() {
-        assertEquals(connectFour.boardColumns, 7);
+        assertEquals( 7,connectFour.boardColumns);
     }
 
     @Test
     void defaultBoardRows() {
-        assertEquals(connectFour.boardRows, 6);
+        assertEquals(6,connectFour.boardRows);
     }
 
     @Test
-    void testsIfPrintBoardReturnsNull() {
+    void customConnectFourIsNotNull() {
+        assertNotNull(connectFour4x4);
+    }
+
+    @Test
+    void customBoardColumns() {
+        assertEquals( 4, connectFour4x4.boardColumns);
+    }
+
+    @Test
+    void customBoardRows() {
+        assertEquals(4,connectFour4x4.boardRows);
+    }
+
+    @Test
+    void printBoardReturnsNotNull() {
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
         PrintStream ps = new PrintStream(baos);
         System.setOut(ps);
         connectFour.printBoard();
         assertNotNull(baos.toString());
-
     }
 
     @Test
-    void clearBoardOutputTest() {
+    void clearDefaultBoardOutputTest() {
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
         PrintStream ps = new PrintStream(baos);
         System.setOut(ps);
@@ -53,6 +68,21 @@ public class ConnectFourTests {
                 "|0|1|2|3|4|5|6\r\n", baos.toString());
     }
 
+    @Test
+    void clearCustomBoardOutputTest() {
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        PrintStream ps = new PrintStream(baos);
+        System.setOut(ps);
+
+        connectFour4x4.printBoard();
+
+        assertEquals("|_|_|_|_\r\n" +
+                "|_|_|_|_\r\n" +
+                "|_|_|_|_\r\n" +
+                "|_|_|_|_\r\n" +
+                "|=|=|=|=\r\n" +
+                "|0|1|2|3\r\n", baos.toString());
+    }
     @Test
     void fullBoardOutputTest() {
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
