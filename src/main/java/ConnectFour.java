@@ -1,6 +1,3 @@
-import java.io.BufferedReader;
-
-
 public class ConnectFour {
 
     char[][] board;
