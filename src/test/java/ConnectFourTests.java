@@ -119,6 +119,21 @@ public class ConnectFourTests {
         char[][] chars = {{88,88,88,88,88,88,88},{88,88,88,88,88,88,88},{88,88,88,88,88,88,88},{88,88,88,88,88,88,88},{88,88,88,88,88,88,88},{88,88,88,88,88,88,88}};
         assertArrayEquals(connectFour.board, chars);
     }
+
+    @Test
+    void additionToEmptyColumnTest() {
+        connectFour.move(2,(char)88);
+        assertThat(connectFour.board[5][2], equalTo((char)88));
+    }
+
+    @Test
+    void additionToNotEmptyColumnTest() {
+        connectFour.move(2,(char)79);
+        connectFour.move(2,(char)79);
+        connectFour.move(2,(char)79);
+        connectFour.move(2,(char)88);
+        assertThat(connectFour.board[2][2], equalTo((char)88));
+    }
 }
 
 
