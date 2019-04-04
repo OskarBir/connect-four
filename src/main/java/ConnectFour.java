@@ -88,8 +88,72 @@ public class ConnectFour {
         return isWon(i-1,column);
     }
 
-    public boolean isWon(int x,int y){
-        return false;
+    public boolean isWon(int x,int y) {
+        char sign = board[x][y];
+        return (horizontal(x,y,sign) || vertical(x,y,sign)|| firstDiagonal(x,y,sign) || secondDiagonal(x,y,sign));
+    }
+
+    public boolean horizontal(int x, int y, char sign){
+        int connected = 0;
+        int i = y;
+        while (i < boardColumns && board[x][i] == sign) {
+            connected++;
+            i++;
+        }
+        i = y - 1;
+        while (i >= 0 && board[x][i] == sign) {
+            connected++;
+            i--;
+        }
+        return connected == 4;
+    }
+
+    public boolean vertical(int x, int y, char sign){
+        int connected = 0;
+        int j = x;
+        while (j < boardRows && board[j][y] == sign) {
+            connected++;
+            j++;
+        }
+        return connected == 4;
+    }
+
+    public boolean firstDiagonal(int x, int y, char sign){
+        int connected = 0;
+        int i = x;
+        int j = y;
+        while (i < boardRows && j >= 0 && board[i][j] == sign) {
+            connected++;
+            i++;
+            j--;
+        }
+        i = x - 1;
+        j = y + 1;
+        while (i >= 0 && j < boardColumns && board[i][j] == sign) {
+            connected++;
+            i--;
+            j++;
+        }
+        return connected == 4;
+    }
+
+    public boolean secondDiagonal(int x, int y, char sign){
+        int connected = 0;
+        int i = x;
+        int j = y;
+        while (i < boardRows && j < boardColumns && board[i][j] == sign) {
+            connected++;
+            i++;
+            j++;
+        }
+        i = x - 1;
+        j = y - 1;
+        while (i >= 0 && j >= 0 && board[i][j] == sign) {
+            connected++;
+            i--;
+            j--;
+        }
+        return connected == 4;
     }
 
 }
