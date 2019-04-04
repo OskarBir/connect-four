@@ -1,10 +1,17 @@
+import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
+import org.hamcrest.Matchers;
+import org.hamcrest.collection.IsArrayWithSize;
+import org.junit.jupiter.api.Test;
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.*;
 
 import org.junit.jupiter.api.Test;
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
+import java.util.Arrays;
 
 public class ConnectFourTests {
     private final ConnectFour connectFour = new ConnectFour();
@@ -73,7 +80,21 @@ public class ConnectFourTests {
                 "|0|1|2|3|4|5|6\r\n", baos.toString());
     }
 
+    @Test
+    void emptyBoardArrayTest() {
+        assertThat(connectFour.board, arrayWithSize(6));
+    }
 
+    @Test
+    void notEmptyBoardArrayTest() {
+        for(int i=0; i<6; i++) {
+            for(int j=0; j<7; j++) {
+                connectFour.board[i][j] = 88;
+            }
+        }
+        char[][] chars = {{88,88,88,88,88,88,88},{88,88,88,88,88,88,88},{88,88,88,88,88,88,88},{88,88,88,88,88,88,88},{88,88,88,88,88,88,88},{88,88,88,88,88,88,88}};
+        assertArrayEquals(connectFour.board, chars);
+    }
 }
 
 
