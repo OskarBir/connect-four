@@ -58,14 +58,14 @@ public class ConnectFourTests {
         System.setOut(ps);
 
         connectFour.printBoard();
-        assertThat(baos.toString(), containsString("|_|_|_|_|_|_|_\r\n" +
-                "|_|_|_|_|_|_|_\r\n" +
-                "|_|_|_|_|_|_|_\r\n" +
-                "|_|_|_|_|_|_|_\r\n" +
-                "|_|_|_|_|_|_|_\r\n" +
-                "|_|_|_|_|_|_|_\r\n" +
-                "|=|=|=|=|=|=|=\r\n" +
-                "|0|1|2|3|4|5|6\r\n"));
+        assertThat(baos.toString(), containsString("|_|_|_|_|_|_|_\n" +
+                "|_|_|_|_|_|_|_\n" +
+                "|_|_|_|_|_|_|_\n" +
+                "|_|_|_|_|_|_|_\n" +
+                "|_|_|_|_|_|_|_\n" +
+                "|_|_|_|_|_|_|_\n" +
+                "|=|=|=|=|=|=|=\n" +
+                "|0|1|2|3|4|5|6\n"));
     }
 
     @Test
@@ -75,12 +75,12 @@ public class ConnectFourTests {
         System.setOut(ps);
 
         connectFour4x4.printBoard();
-        assertThat(baos.toString(), containsString("|_|_|_|_\r\n" +
-                "|_|_|_|_\r\n" +
-                "|_|_|_|_\r\n" +
-                "|_|_|_|_\r\n" +
-                "|=|=|=|=\r\n" +
-                "|0|1|2|3\r\n"));
+        assertThat(baos.toString(), containsString("|_|_|_|_\n" +
+                "|_|_|_|_\n" +
+                "|_|_|_|_\n" +
+                "|_|_|_|_\n" +
+                "|=|=|=|=\n" +
+                "|0|1|2|3\n"));
     }
     @Test
     void fullBoardOutputTest() {
@@ -93,14 +93,14 @@ public class ConnectFourTests {
             }
         }
         connectFour.printBoard();
-        assertThat(baos.toString(), containsString("|X|X|X|X|X|X|X\r\n" +
-                "|X|X|X|X|X|X|X\r\n" +
-                "|X|X|X|X|X|X|X\r\n" +
-                "|X|X|X|X|X|X|X\r\n" +
-                "|X|X|X|X|X|X|X\r\n" +
-                "|X|X|X|X|X|X|X\r\n" +
-                "|=|=|=|=|=|=|=\r\n" +
-                "|0|1|2|3|4|5|6\r\n"));
+        assertThat(baos.toString(), containsString("|X|X|X|X|X|X|X\n" +
+                "|X|X|X|X|X|X|X\n" +
+                "|X|X|X|X|X|X|X\n" +
+                "|X|X|X|X|X|X|X\n" +
+                "|X|X|X|X|X|X|X\n" +
+                "|X|X|X|X|X|X|X\n" +
+                "|=|=|=|=|=|=|=\n" +
+                "|0|1|2|3|4|5|6\n"));
     }
 
     @Test
@@ -240,6 +240,24 @@ public class ConnectFourTests {
         System.setOut(ps);
         connectFour3x3.isTie();
         assertThat(baos.toString(), containsString("tie"));
+
+    }
+
+    @Test
+    void gameIsNotTiedTest() {
+        connectFour3x3.move(0,(char)79);
+        connectFour3x3.move(0,(char)88);
+        connectFour3x3.move(0,(char)79);
+        connectFour3x3.move(1,(char)88);
+        connectFour3x3.move(1,(char)79);
+        connectFour3x3.move(1,(char)88);
+        connectFour3x3.move(2,(char)79);
+        connectFour3x3.move(2,(char)88);
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        PrintStream ps = new PrintStream(baos);
+        System.setOut(ps);
+        connectFour3x3.isTie();
+        assertThat(baos.toString(), not(containsString("tie")));
 
     }
 

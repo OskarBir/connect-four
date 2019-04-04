@@ -74,16 +74,16 @@ public class ConnectFour {
                 else
                     System.out.print("|" +board[i][j]);
             }
-            System.out.println();
+            System.out.print("\n");
         }
 
         for(int i=0;i<boardColumns;i++)
             System.out.print("|=");
-        System.out.println();
+        System.out.print("\n");
 
         for(int i=0;i<boardColumns;i++)
             System.out.print("|"+i);
-        System.out.println();
+        System.out.print("\n");
     }
 
     public boolean move(int column, char sign){
