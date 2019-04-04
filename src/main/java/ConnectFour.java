@@ -60,6 +60,8 @@ public class ConnectFour {
                 System.out.println("tie");
                 break;
             }
+            connectFour.isTie();
+            break;
         }
     }
 
@@ -165,6 +167,12 @@ public class ConnectFour {
             j--;
         }
         return connected == 4;
+    }
+
+    public void isTie(){
+        if(movesCounter == (boardColumns*boardRows)){
+            System.out.println("tie");
+        }
     }
 
 }
