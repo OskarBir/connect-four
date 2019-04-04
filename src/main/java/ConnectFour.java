@@ -1,3 +1,7 @@
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+
 public class ConnectFour {
 
     char[][] board;
@@ -8,18 +12,47 @@ public class ConnectFour {
         board=new char[boardRows][boardColumns];
     }
 
-    public static void main(String args[]){
+    public static void main(String args[]) throws IOException {
+        BufferedReader reader=new BufferedReader(new InputStreamReader(System.in));
         System.out.println("Connect 4 to win a game.");
         ConnectFour connectFour = new ConnectFour();
-        connectFour.board[5][0] = 88;
-        connectFour.board[5][1] = 79;
-        connectFour.board[5][2] = 88;
         connectFour.printBoard();
-//        while(true){
-//            System.out.println("\n\nX Player turn:");
-//            System.out.println("\n\nO Player turn:");
-//        }
+        somebodyWon:
+        while(true){
+            int column;
+            while(true){
+                System.out.println("\nX player turn:");
+                column=Integer.parseInt(reader.readLine());
+                if(connectFour.board[0][column] == 0){
+                    if(connectFour.move(column, (char)88)){
+                        connectFour.printBoard();
+                        System.out.println("\nPlayer X won!");
+                        break somebodyWon;
+                    }
+                    break;
+                }
+                else
+                    System.out.println("Column number:"+column+" is full.");
+            }
+            connectFour.printBoard();
+            while(true){
+                System.out.println("\nO player turn:");
+                column=Integer.parseInt(reader.readLine());
+                if(connectFour.board[0][column] == 0){
+                    if(connectFour.move(column, (char)79)){
+                        connectFour.printBoard();
+                        System.out.println("\nPlayer O won!");
+                        break somebodyWon;
+                    }
+                    break;
+                }
+                else
+                    System.out.println("Column number:"+column+" is full.");
+            }
+            connectFour.printBoard();
+        }
     }
+
 
     public void printBoard(){
         for(int i=0;i<board.length;i++){
@@ -44,7 +77,7 @@ public class ConnectFour {
     public boolean move(int column, char sign){
         int i=0;
         for(i=0;i<boardRows;i++){
-            if(board[i][column] == 1 || board[i][column] == 2){
+            if(board[i][column] == 88 || board[i][column] == 79){
                 board[i-1][column]=sign;
                 break;
             }
@@ -56,7 +89,7 @@ public class ConnectFour {
     }
 
     public boolean isWon(int x,int y){
-        return true;
+        return false;
     }
 
 }
