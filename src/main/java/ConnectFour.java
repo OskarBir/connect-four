@@ -20,7 +20,6 @@ public class ConnectFour {
     }
 
     public static void main(String args[]) throws IOException {
-        BufferedReader reader=new BufferedReader(new InputStreamReader(System.in));
         System.out.println("Connect 4 to win a game.");
         ConnectFour connectFour = new ConnectFour();
         connectFour.printBoard();
@@ -29,7 +28,7 @@ public class ConnectFour {
             int column;
             while (true) {
                 System.out.println("\nX player turn:");
-                column = Integer.parseInt(reader.readLine());
+                column = columnInput();
                 if (connectFour.emptySpace(column)) {
                     if (connectFour.move(column, (char) 88)) {
                         connectFour.printBoard();
@@ -43,7 +42,7 @@ public class ConnectFour {
             connectFour.printBoard();
             while (true) {
                 System.out.println("\nO player turn:");
-                column = Integer.parseInt(reader.readLine());
+                column = columnInput();
                 if (connectFour.emptySpace(column)) {
                     if (connectFour.move(column, (char) 79)) {
                         connectFour.printBoard();
@@ -55,14 +54,14 @@ public class ConnectFour {
                     System.out.println("Column number:" + column + " is full.");
             }
             connectFour.printBoard();
-
-            if(connectFour.movesCounter == (connectFour.boardColumns*connectFour.boardRows)){
-                System.out.println("tie");
-                break;
-            }
             connectFour.isTie();
             break;
         }
+    }
+
+    public static int columnInput() throws IOException {
+        BufferedReader reader=new BufferedReader(new InputStreamReader(System.in));
+        return Integer.parseInt(reader.readLine());
     }
 
 

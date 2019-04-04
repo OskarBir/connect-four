@@ -2,11 +2,14 @@ import org.junit.jupiter.api.Test;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.*;
 import static org.junit.jupiter.api.Assertions.*;
+import static org.assertj.core.api.Assertions.*;
 
 
+import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
-import java.io.IOException;
+import java.io.DataInputStream;
 import java.io.PrintStream;
+import java.nio.ByteBuffer;
 
 public class ConnectFourTests {
     private final ConnectFour connectFour = new ConnectFour();
@@ -273,6 +276,29 @@ public class ConnectFourTests {
         assertFalse(connectFour.emptySpace(1));
     }
 
+    @Test
+    void thrownExceptionOnStringTest() {
+        connectFour.board[0][1]=88;
+        ByteArrayInputStream in = new ByteArrayInputStream("My string".getBytes());
+        System.setIn(in);
+        assertThatThrownBy(ConnectFour::columnInput);
+    }
+
+    @Test
+    void thrownExceptionOnEmptyStringTest() {
+        connectFour.board[0][1]=88;
+        ByteArrayInputStream in = new ByteArrayInputStream("".getBytes());
+        System.setIn(in);
+        assertThatThrownBy(ConnectFour::columnInput);
+    }
+
+    @Test
+    void thrownExceptionOnTooLargeColumnNumberTest() {
+        connectFour.board[0][1]=88;
+        ByteArrayInputStream in = new ByteArrayInputStream(ByteBuffer.allocate(10).putInt(123).array());
+        System.setIn(in);
+        assertThatThrownBy(ConnectFour::columnInput);
+    }
 }
 
 
