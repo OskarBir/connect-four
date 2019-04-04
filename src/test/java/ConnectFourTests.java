@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 
 import java.io.ByteArrayOutputStream;
+import java.io.IOException;
 import java.io.PrintStream;
 
 public class ConnectFourTests {
@@ -261,6 +262,16 @@ public class ConnectFourTests {
 
     }
 
+    @Test
+    void emptySpaceTest() {
+        assertTrue(connectFour.emptySpace(1));
+    }
+
+    @Test
+    void notEmptySpaceTest() {
+        connectFour.board[0][1]=88;
+        assertFalse(connectFour.emptySpace(1));
+    }
 
 }
 

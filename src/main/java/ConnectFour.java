@@ -30,7 +30,7 @@ public class ConnectFour {
             while (true) {
                 System.out.println("\nX player turn:");
                 column = Integer.parseInt(reader.readLine());
-                if (connectFour.board[0][column] == 0) {
+                if (connectFour.emptySpace(column)) {
                     if (connectFour.move(column, (char) 88)) {
                         connectFour.printBoard();
                         System.out.println("\nPlayer X won!");
@@ -44,7 +44,7 @@ public class ConnectFour {
             while (true) {
                 System.out.println("\nO player turn:");
                 column = Integer.parseInt(reader.readLine());
-                if (connectFour.board[0][column] == 0) {
+                if (connectFour.emptySpace(column)) {
                     if (connectFour.move(column, (char) 79)) {
                         connectFour.printBoard();
                         System.out.println("\nPlayer O won!");
@@ -63,6 +63,11 @@ public class ConnectFour {
             connectFour.isTie();
             break;
         }
+    }
+
+
+    public boolean emptySpace(int column){
+        return board[0][column] == 0;
     }
 
 
