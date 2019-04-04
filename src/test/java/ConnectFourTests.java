@@ -1,17 +1,11 @@
 import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
-
-import org.hamcrest.Matchers;
-import org.hamcrest.collection.IsArrayWithSize;
 import org.junit.jupiter.api.Test;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.*;
-
-import org.junit.jupiter.api.Test;
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
-import java.util.Arrays;
 
 public class ConnectFourTests {
     private final ConnectFour connectFour = new ConnectFour();
@@ -42,7 +36,7 @@ public class ConnectFourTests {
     }
 
     @Test
-    void clearBoardTest() {
+    void clearBoardOutputTest() {
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
         PrintStream ps = new PrintStream(baos);
         System.setOut(ps);
@@ -60,7 +54,7 @@ public class ConnectFourTests {
     }
 
     @Test
-    void fullyFilledBoardTest() {
+    void fullBoardOutputTest() {
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
         PrintStream ps = new PrintStream(baos);
         System.setOut(ps);
@@ -86,7 +80,7 @@ public class ConnectFourTests {
     }
 
     @Test
-    void notEmptyBoardArrayTest() {
+    void fullBoardArrayTest() {
         for(int i=0; i<6; i++) {
             for(int j=0; j<7; j++) {
                 connectFour.board[i][j] = 88;

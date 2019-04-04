@@ -15,6 +15,10 @@ public class ConnectFour {
         connectFour.board[5][1] = 79;
         connectFour.board[5][2] = 88;
         connectFour.printBoard();
+//        while(true){
+//            System.out.println("\n\nX Player turn:");
+//            System.out.println("\n\nO Player turn:");
+//        }
     }
 
     public void printBoard(){
@@ -35,6 +39,24 @@ public class ConnectFour {
         for(int i=0;i<boardColumns;i++)
             System.out.print("|"+i);
         System.out.println();
+    }
+
+    public boolean move(int column, char sign){
+        int i=0;
+        for(i=0;i<boardRows;i++){
+            if(board[i][column] == 1 || board[i][column] == 2){
+                board[i-1][column]=sign;
+                break;
+            }
+        }
+        if(i == boardRows)
+            board[i-1][column]=sign;
+
+        return isWon(i-1,column);
+    }
+
+    public boolean isWon(int x,int y){
+        return true;
     }
 
 }
