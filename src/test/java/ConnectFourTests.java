@@ -1,14 +1,18 @@
 import org.junit.jupiter.api.Test;
+import org.mockito.Mock;
+import org.mockito.Mockito;
+
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.*;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.assertj.core.api.Assertions.*;
+import static org.mockito.ArgumentMatchers.anyString;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.spy;
+import static org.mockito.Mockito.when;
 
 
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
-import java.io.DataInputStream;
-import java.io.PrintStream;
+import java.io.*;
 import java.nio.ByteBuffer;
 
 public class ConnectFourTests {
@@ -124,13 +128,13 @@ public class ConnectFourTests {
     }
 
     @Test
-    void additionToEmptyColumnTest() {
+    void additionToEmptyColumnTest() throws IOException {
         connectFour.move(2,(char)88);
         assertThat(connectFour.board[5][2], equalTo((char)88));
     }
 
     @Test
-    void additionToNotEmptyColumnTest() {
+    void additionToNotEmptyColumnTest() throws IOException {
         connectFour.move(2,(char)79);
         connectFour.move(2,(char)79);
         connectFour.move(2,(char)79);
@@ -139,7 +143,7 @@ public class ConnectFourTests {
     }
 
     @Test
-    void isWonHorizontalTest() {
+    void isWonHorizontalTest() throws IOException {
         connectFour.move(0,(char)79);
         connectFour.move(1,(char)79);
         connectFour.move(2,(char)79);
@@ -229,7 +233,7 @@ public class ConnectFourTests {
     }
 
     @Test
-    void gameIsTiedTest() {
+    void gameIsTiedTest() throws IOException {
         connectFour3x3.move(0,(char)79);
         connectFour3x3.move(0,(char)88);
         connectFour3x3.move(0,(char)79);
@@ -248,7 +252,7 @@ public class ConnectFourTests {
     }
 
     @Test
-    void gameIsNotTiedTest() {
+    void gameIsNotTiedTest() throws IOException {
         connectFour3x3.move(0,(char)79);
         connectFour3x3.move(0,(char)88);
         connectFour3x3.move(0,(char)79);
@@ -299,6 +303,40 @@ public class ConnectFourTests {
         System.setIn(in);
         assertThatThrownBy(ConnectFour::columnInput);
     }
+
+    @Test
+    void isIntegerWithIntTest() {
+        assertTrue(connectFour.isInteger("123"));
+    }
+
+    @Test
+    void isIntegerWithStringTest() {
+        assertFalse(connectFour.isInteger("string"));
+    }
+
+    @Test
+    void isIntegerWithDoubleTest() {
+        assertFalse(connectFour.isInteger("2.0"));
+    }
+
+    @Test
+    void reverseTest() throws IOException {
+        ByteArrayInputStream in = new ByteArrayInputStream("1".getBytes());
+        System.setIn(in);
+        connectFour.move(5,(char)88);
+        connectFour.reverse();
+        assertEquals(connectFour.board[5][5], 0);
+    }
+
+    @Test
+    void notReversedTest() throws IOException {
+        ByteArrayInputStream in = new ByteArrayInputStream("".getBytes());
+        System.setIn(in);
+        connectFour.move(5,(char)88);
+        connectFour.reverse();
+        assertEquals(connectFour.board[5][5], 88);
+    }
+
 }
 
 

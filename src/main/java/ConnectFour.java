@@ -1,6 +1,7 @@
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.text.ParseException;
 
 public class ConnectFour {
 
@@ -8,6 +9,8 @@ public class ConnectFour {
     int boardColumns;
     int boardRows;
     int movesCounter;
+    int lastMoveX;
+    int lastMoveY;
 
     ConnectFour(int boardColumns, int boardRows, int movesCounter){
         board=new char[boardRows][boardColumns];
@@ -55,7 +58,6 @@ public class ConnectFour {
             }
             connectFour.printBoard();
             connectFour.isTie();
-            break;
         }
     }
 
@@ -90,19 +92,30 @@ public class ConnectFour {
         System.out.print("\n");
     }
 
-    public boolean move(int column, char sign){
+    public boolean move(int column, char sign) throws IOException {
         int i=0;
         for(i=0;i<boardRows;i++){
             if(board[i][column] == 88 || board[i][column] == 79){
                 board[i-1][column]=sign;
+                lastMoveX = i-1;
+                lastMoveY = column;
                 break;
             }
         }
-        if(i == boardRows)
-            board[i-1][column]=sign;
+        if(i == boardRows) {
+            board[i - 1][column] = sign;
+            lastMoveX = i-1;
+            lastMoveY = column;
+        }
 
         movesCounter++;
-        return isWon(i-1,column);
+        if(isWon(i-1,column))
+            return true;
+        else {
+            printBoard();
+            reverse();
+            return false;
+        }
     }
 
     public boolean isWon(int x,int y) {
@@ -176,6 +189,23 @@ public class ConnectFour {
     public void isTie(){
         if(movesCounter == (boardColumns*boardRows)){
             System.out.println("tie");
+        }
+    }
+
+    public void reverse() throws IOException {
+        BufferedReader reader=new BufferedReader(new InputStreamReader(System.in));
+        System.out.println("Enter any Integer if u want to reverse your move. Press enter to continue.");
+        if (isInteger(reader.readLine())) {
+            board[lastMoveX][lastMoveY] = 0;
+            System.out.println("You reversed. Turn lost.");
+        }
+    }
+    public boolean isInteger(String string) {
+        try {
+            Integer.valueOf(string);
+            return true;
+        } catch (NumberFormatException e) {
+            return false;
         }
     }
 
