@@ -303,17 +303,17 @@ public class ConnectFourTests {
 
     @Test
     void isIntegerWithIntTest() {
-        assertTrue(connectFour.isInteger("123"));
+        assertTrue(ConnectFour.isInteger("123"));
     }
 
     @Test
     void isIntegerWithStringTest() {
-        assertFalse(connectFour.isInteger("string"));
+        assertFalse(ConnectFour.isInteger("string"));
     }
 
     @Test
     void isIntegerWithDoubleTest() {
-        assertFalse(connectFour.isInteger("2.0"));
+        assertFalse(ConnectFour.isInteger("2.0"));
     }
 
     @Test

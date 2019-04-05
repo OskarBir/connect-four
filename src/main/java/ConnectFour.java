@@ -11,14 +11,14 @@ public class ConnectFour {
     int lastMoveX;
     int lastMoveY;
 
-    ConnectFour(int boardColumns, int boardRows){
-        board=new char[boardRows][boardColumns];
+    ConnectFour(int boardColumns, int boardRows) {
+        board = new char[boardRows][boardColumns];
         this.boardColumns = boardColumns;
         this.boardRows = boardRows;
     }
 
-    ConnectFour(){
-        this(7,6);
+    ConnectFour() {
+        this(7, 6);
     }
 
     public static void main(String args[]) throws IOException {
@@ -26,7 +26,7 @@ public class ConnectFour {
         ConnectFour connectFour = ConnectFour.mxn();
         connectFour.printBoard();
         somebodyWon:
-        while(true) {
+        while (true) {
             int column;
             while (true) {
                 System.out.println("\nX player turn:");
@@ -61,56 +61,56 @@ public class ConnectFour {
     }
 
     public static int columnInput() throws IOException {
-        BufferedReader reader=new BufferedReader(new InputStreamReader(System.in));
+        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
         return Integer.parseInt(reader.readLine());
     }
 
 
-    public boolean emptySpace(int column){
-        if(column>=boardColumns)
+    public boolean emptySpace(int column) {
+        if (column >= boardColumns)
             return false;
         return board[0][column] == 0;
     }
 
 
-    public void printBoard(){
-        for(int i=0;i<board.length;i++){
-            for(int j=0;j<board[0].length;j++){
-                if(board[i][j] == 0)
+    public void printBoard() {
+        for (int i = 0; i < board.length; i++) {
+            for (int j = 0; j < board[0].length; j++) {
+                if (board[i][j] == 0)
                     System.out.print("|_");
                 else
-                    System.out.print("|" +board[i][j]);
+                    System.out.print("|" + board[i][j]);
             }
             System.out.print("\n");
         }
 
-        for(int i=0;i<boardColumns;i++)
+        for (int i = 0; i < boardColumns; i++)
             System.out.print("|=");
         System.out.print("\n");
 
-        for(int i=0;i<boardColumns;i++)
-            System.out.print("|"+i);
+        for (int i = 0; i < boardColumns; i++)
+            System.out.print("|" + i);
         System.out.print("\n");
     }
 
     public boolean move(int column, char sign) throws IOException {
-        int i=0;
-        for(i=0;i<boardRows;i++){
-            if(board[i][column] == 88 || board[i][column] == 79){
-                board[i-1][column]=sign;
-                lastMoveX = i-1;
+        int i = 0;
+        for (i = 0; i < boardRows; i++) {
+            if (board[i][column] == 88 || board[i][column] == 79) {
+                board[i - 1][column] = sign;
+                lastMoveX = i - 1;
                 lastMoveY = column;
                 break;
             }
         }
-        if(i == boardRows) {
+        if (i == boardRows) {
             board[i - 1][column] = sign;
-            lastMoveX = i-1;
+            lastMoveX = i - 1;
             lastMoveY = column;
         }
 
         movesCounter++;
-        if(isWon(i-1,column))
+        if (isWon(i - 1, column))
             return true;
         else {
             printBoard();
@@ -119,12 +119,12 @@ public class ConnectFour {
         }
     }
 
-    public boolean isWon(int x,int y) {
+    public boolean isWon(int x, int y) {
         char sign = board[x][y];
-        return (horizontal(x,y,sign) || vertical(x,y,sign)|| firstDiagonal(x,y,sign) || secondDiagonal(x,y,sign));
+        return (horizontal(x, y, sign) || vertical(x, y, sign) || firstDiagonal(x, y, sign) || secondDiagonal(x, y, sign));
     }
 
-    public boolean horizontal(int x, int y, char sign){
+    public boolean horizontal(int x, int y, char sign) {
         int connected = 0;
         int i = y;
         while (i < boardColumns && board[x][i] == sign) {
@@ -139,7 +139,7 @@ public class ConnectFour {
         return connected == 4;
     }
 
-    public boolean vertical(int x, int y, char sign){
+    public boolean vertical(int x, int y, char sign) {
         int connected = 0;
         int j = x;
         while (j < boardRows && board[j][y] == sign) {
@@ -149,7 +149,7 @@ public class ConnectFour {
         return connected == 4;
     }
 
-    public boolean firstDiagonal(int x, int y, char sign){
+    public boolean firstDiagonal(int x, int y, char sign) {
         int connected = 0;
         int i = x;
         int j = y;
@@ -168,7 +168,7 @@ public class ConnectFour {
         return connected == 4;
     }
 
-    public boolean secondDiagonal(int x, int y, char sign){
+    public boolean secondDiagonal(int x, int y, char sign) {
         int connected = 0;
         int i = x;
         int j = y;
@@ -187,14 +187,14 @@ public class ConnectFour {
         return connected == 4;
     }
 
-    public void isTie(){
-        if(movesCounter == (boardColumns*boardRows)){
+    public void isTie() {
+        if (movesCounter == (boardColumns * boardRows)) {
             System.out.println("tie");
         }
     }
 
     public void reverse() throws IOException {
-        BufferedReader reader=new BufferedReader(new InputStreamReader(System.in));
+        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
         System.out.println("Enter any Integer if u want to reverse your move. Press enter to continue.");
         if (isInteger(reader.readLine())) {
             board[lastMoveX][lastMoveY] = 0;
@@ -202,6 +202,7 @@ public class ConnectFour {
             movesCounter--;
         }
     }
+
     public static boolean isInteger(String string) {
         try {
             Integer.valueOf(string);
@@ -212,9 +213,9 @@ public class ConnectFour {
     }
 
     public static ConnectFour mxn() throws IOException {
-        BufferedReader reader=new BufferedReader(new InputStreamReader(System.in));
+        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
         System.out.println("Enter any Integer if u want to set a board size. Press enter if u want to play on default board size(7x6).");
-        int m=7,n =6;
+        int m = 7, n = 6;
         if (isInteger(reader.readLine())) {
             System.out.println("Enter what size of board you want to play(MxN):");
             System.out.println("Enter M:");
@@ -225,11 +226,11 @@ public class ConnectFour {
             }
             System.out.println("Enter N:");
             try {
-                n= Integer.valueOf(reader.readLine());
+                n = Integer.valueOf(reader.readLine());
             } catch (NumberFormatException e) {
                 System.out.println("It was not Integer.Try again");
             }
         }
-        return new ConnectFour(m,n);
+        return new ConnectFour(m, n);
     }
 }
