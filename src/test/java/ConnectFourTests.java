@@ -1,24 +1,15 @@
 import org.junit.jupiter.api.Test;
-import org.mockito.Mock;
-import org.mockito.Mockito;
-
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.*;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.assertj.core.api.Assertions.*;
-import static org.mockito.ArgumentMatchers.anyString;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.spy;
-import static org.mockito.Mockito.when;
-
-
 import java.io.*;
 import java.nio.ByteBuffer;
 
 public class ConnectFourTests {
     private final ConnectFour connectFour = new ConnectFour();
-    private final ConnectFour connectFour4x4 = new ConnectFour(4,4,0);
-    private final ConnectFour connectFour3x3 = new ConnectFour(3,3,0);
+    private final ConnectFour connectFour4x4 = new ConnectFour(4,4);
+    private final ConnectFour connectFour3x3 = new ConnectFour(3,3);
 
     @Test
     void connectFourIsNotNull() {
