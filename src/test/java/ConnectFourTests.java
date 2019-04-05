@@ -272,6 +272,12 @@ public class ConnectFourTests {
     }
 
     @Test
+    void emptySpaceWithWrongColumnTest() {
+        connectFour.board[0][1]=88;
+        assertFalse(connectFour.emptySpace(10));
+    }
+
+    @Test
     void thrownExceptionOnStringTest() {
         connectFour.board[0][1]=88;
         ByteArrayInputStream in = new ByteArrayInputStream("My string".getBytes());
@@ -326,6 +332,20 @@ public class ConnectFourTests {
         connectFour.move(5,(char)88);
         connectFour.reverse();
         assertEquals(connectFour.board[5][5], 88);
+    }
+
+    @Test
+    void mxnRowsTest() throws IOException {
+        ByteArrayInputStream in = new ByteArrayInputStream("1".getBytes());
+        System.setIn(in);
+        assertEquals(ConnectFour.mxn().boardRows, 6);
+    }
+
+    @Test
+    void mxnColumnsTest() throws IOException {
+        ByteArrayInputStream in = new ByteArrayInputStream("1".getBytes());
+        System.setIn(in);
+        assertEquals(ConnectFour.mxn().boardColumns, 7);
     }
 
 }

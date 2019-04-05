@@ -23,7 +23,7 @@ public class ConnectFour {
 
     public static void main(String args[]) throws IOException {
         System.out.println("Connect 4 to win a game.");
-        ConnectFour connectFour = new ConnectFour();
+        ConnectFour connectFour = ConnectFour.mxn();
         connectFour.printBoard();
         somebodyWon:
         while(true) {
@@ -39,7 +39,7 @@ public class ConnectFour {
                     }
                     break;
                 } else
-                    System.out.println("Column number:" + column + " is full.");
+                    System.out.println("You cant play in column:" + column);
             }
             connectFour.printBoard();
             while (true) {
@@ -53,7 +53,7 @@ public class ConnectFour {
                     }
                     break;
                 } else
-                    System.out.println("Column number:" + column + " is full.");
+                    System.out.println("You cant play in column:" + column);
             }
             connectFour.printBoard();
             connectFour.isTie();
@@ -67,6 +67,8 @@ public class ConnectFour {
 
 
     public boolean emptySpace(int column){
+        if(column>=boardColumns)
+            return false;
         return board[0][column] == 0;
     }
 
@@ -197,9 +199,10 @@ public class ConnectFour {
         if (isInteger(reader.readLine())) {
             board[lastMoveX][lastMoveY] = 0;
             System.out.println("You reversed. Turn lost.");
+            movesCounter--;
         }
     }
-    public boolean isInteger(String string) {
+    public static boolean isInteger(String string) {
         try {
             Integer.valueOf(string);
             return true;
@@ -208,4 +211,25 @@ public class ConnectFour {
         }
     }
 
+    public static ConnectFour mxn() throws IOException {
+        BufferedReader reader=new BufferedReader(new InputStreamReader(System.in));
+        System.out.println("Enter any Integer if u want to set a board size. Press enter if u want to play on default board size(7x6).");
+        int m=7,n =6;
+        if (isInteger(reader.readLine())) {
+            System.out.println("Enter what size of board you want to play(MxN):");
+            System.out.println("Enter M:");
+            try {
+                m = Integer.valueOf(reader.readLine());
+            } catch (NumberFormatException e) {
+                System.out.println("It was not Integer.Try again");
+            }
+            System.out.println("Enter N:");
+            try {
+                n= Integer.valueOf(reader.readLine());
+            } catch (NumberFormatException e) {
+                System.out.println("It was not Integer.Try again");
+            }
+        }
+        return new ConnectFour(m,n);
+    }
 }
