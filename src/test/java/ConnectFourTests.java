@@ -1,3 +1,4 @@
+import org.junit.Before;
 import org.junit.jupiter.api.Test;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.*;
@@ -10,6 +11,8 @@ public class ConnectFourTests {
     private final ConnectFour connectFour = new ConnectFour();
     private final ConnectFour connectFour4x4 = new ConnectFour(4,4);
     private final ConnectFour connectFour3x3 = new ConnectFour(3,3);
+
+    PrintStream oldOut=System.out;
 
     @Test
     void connectFourIsNotNull() {
@@ -320,6 +323,9 @@ public class ConnectFourTests {
     void reverseTest() throws IOException {
         ByteArrayInputStream in = new ByteArrayInputStream("1".getBytes());
         System.setIn(in);
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        PrintStream ps = new PrintStream(baos);
+        System.setOut(ps);
         connectFour.move(5,(char)88);
         connectFour.reverse();
         assertEquals(connectFour.board[5][5], 0);
@@ -329,6 +335,9 @@ public class ConnectFourTests {
     void notReversedTest() throws IOException {
         ByteArrayInputStream in = new ByteArrayInputStream("".getBytes());
         System.setIn(in);
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        PrintStream ps = new PrintStream(baos);
+        System.setOut(ps);
         connectFour.move(5,(char)88);
         connectFour.reverse();
         assertEquals(connectFour.board[5][5], 88);
