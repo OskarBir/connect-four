@@ -6,7 +6,7 @@ import org.junit.runner.RunWith;
 import static org.junit.Assert.assertEquals;
 
 @RunWith(JUnitParamsRunner.class)
-public class isWonTests {
+public class IsWonTests {
 
     @Test
     @FileParameters("src/test/test.csv")

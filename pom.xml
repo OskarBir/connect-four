@@ -97,9 +97,10 @@
             <artifactId>jacoco-maven-plugin</artifactId>
             <version>0.8.2</version>
             <configuration>
-                <excludes>
-                    <exclude>exceptions/**/*</exclude>
-                </excludes>
+                <includes>
+                    <include>IsIntegerTests.java</include>
+                    <include>IsWonTests.java</include>
+                </includes>
             </configuration>
             <executions>
                 <execution>

@@ -1,4 +1,3 @@
-import org.junit.Before;
 import org.junit.jupiter.api.Test;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.*;
@@ -11,8 +10,6 @@ public class ConnectFourTests {
     private final ConnectFour connectFour = new ConnectFour();
     private final ConnectFour connectFour4x4 = new ConnectFour(4,4);
     private final ConnectFour connectFour3x3 = new ConnectFour(3,3);
-
-    PrintStream oldOut=System.out;
 
     @Test
     void connectFourIsNotNull() {
